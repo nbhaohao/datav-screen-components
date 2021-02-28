@@ -1,0 +1,13 @@
+{
+  "name": "datav-screen-components",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "nbhaohao <nbhaohao@163.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "rollup -wc rollup.config.dev.js"
+  },
+  "devDependencies": {
+    "rollup": "^2.40.0"
+  }
+}
