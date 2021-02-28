@@ -1,9 +1,4 @@
-console.log("hello rollup")
-const c = () => {
-  console.log("123")
-  return "3"
+import Test from './Test'
+export default (Vue) => {
+  Vue.component(Test.name, Test)
 }
-
-c()
-
-export default {}
