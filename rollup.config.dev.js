@@ -17,7 +17,7 @@ module.exports = {
       file: resolve("./dist/datav-components.js"),
       format: "umd",
       globals: {
-        "vue": "vue"
+        "vue": "Vue"
       }
     },
     {
