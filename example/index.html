@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
     <script src="../dist/datav-components.js"></script>
 </head>
 <body>
+<div id="app">{{message}}
+    <test-component />
+</div>
     <script>
-
+      const app = Vue.createApp({
+        setup() {
+          const message = "hello world"
+          return {
+            message
+          }
+        }
+      }).use(datavComponents).mount("#app")
     </script>
 </body>
 </html>
