@@ -58,7 +58,7 @@
 
 <script>
 export default {
-  name: "DataVLoading",
+  name: "DatavLoading",
   props: {
     width: {
       type: [Number, String],

@@ -48,7 +48,7 @@
 import { ref, onMounted, getCurrentInstance, computed } from "vue";
 import { v4 as uuidV4 } from "uuid";
 export default {
-  name: "DataVFlyBox",
+  name: "DatavFlyBox",
   props: {
     lineColor: {
       type: String,
