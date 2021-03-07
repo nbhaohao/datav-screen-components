@@ -10,6 +10,9 @@
     "build": "rollup -c rollup.config.dev.js",
     "build:prod": "rollup -c rollup.config.prod.js"
   },
+  "peerDependencies": {
+    "uuid": "^8.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.8",
