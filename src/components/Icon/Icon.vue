@@ -1,5 +1,5 @@
 <template>
-  <svg>
+  <svg class="icon">
     <use :href="iconName"></use>
   </svg>
 </template>
@@ -9,9 +9,13 @@ export default {
   name: "Icon",
   props: {
     name: String,
+    prefix: {
+      type: String,
+      default: "icon",
+    },
   },
   setup(props) {
-    const iconName = `#${props.name}`;
+    const iconName = `#${props.prefix}${props.name}`;
     return {
       iconName,
     };
@@ -19,4 +23,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.icon {
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+</style>
