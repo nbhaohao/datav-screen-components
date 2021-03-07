@@ -1,4 +1,6 @@
-import Test from './Test'
+import Test from "./components/Test";
+import Icon from "./components/Icon";
 export default (Vue) => {
-  Vue.component(Test.name, Test)
-}
+  Vue.use(Test);
+  Vue.use(Icon);
+};
