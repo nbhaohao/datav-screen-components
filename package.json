@@ -26,5 +26,7 @@
     "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.32.8"
   },
-  "dependencies": {}
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
 }
