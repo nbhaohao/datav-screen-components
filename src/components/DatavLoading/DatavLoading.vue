@@ -50,7 +50,7 @@
         ></animate>
       </circle>
     </svg>
-    <div class="data-v-loading-content" :style="{ width: `${width}px` }">
+    <div class="data-v-loading-content">
       <slot></slot>
     </div>
   </div>
@@ -86,8 +86,9 @@ export default {
 
 <style scoped lang="scss">
 .data-v-loading {
-  .data-v-loading-content {
-    text-align: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 </style>
