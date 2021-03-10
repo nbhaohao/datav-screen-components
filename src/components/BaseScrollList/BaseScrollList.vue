@@ -3,28 +3,58 @@
     <div
       class="base-scroll-list-header"
       :style="{
-        backgroundColor: config.headerBg,
-        height: `${config.headerHeight}px`,
+        backgroundColor: actualConfig.headerBg,
+        height: `${actualConfig.headerHeight}px`,
       }"
     >
       <div
         class="header-item base-scroll-list-text"
         v-for="(headerItem, i) in headerData"
         :key="headerItem + i"
-        :style="headerStyle[i]"
+        :style="{
+          width: `${columnWidths[i]}px`,
+          textAlign: aligns[i],
+          fontSize: `${actualConfig.headerFontSize}px`,
+          color: actualConfig.headerColor,
+          ...headerStyle[i],
+        }"
         v-html="headerItem"
       ></div>
     </div>
-    <div class="base-scroll-list-rows"></div>
+    <div
+      class="base-scroll-list-rows"
+      v-for="(rowData, rowIndex) in rowsData"
+      :key="rowIndex"
+      :style="{
+        height: `${rowHeights[rowIndex]}px`,
+        backgroundColor:
+          rowIndex % 2 === 0 ? actualConfig.rowBg[1] : actualConfig.rowBg[0],
+      }"
+    >
+      <div
+        class="base-scroll-list-columns"
+        v-for="(colData, colIndex) in rowData"
+        v-html="colData"
+        :key="colIndex"
+        :style="{
+          width: `${columnWidths[colIndex]}px`,
+          textAlign: aligns[colIndex],
+          fontSize: `${actualConfig.rowFontSize}px`,
+          color: actualConfig.rowColor,
+          ...rowStyle[colIndex],
+        }"
+      ></div>
+    </div>
   </div>
 </template>
 
 <script>
-import { onMounted, ref, reactive } from "vue";
+import { onMounted, ref } from "vue";
 import { v4 as uuidV4 } from "uuid";
 import useScreen from "../../hooks/useScreen";
-import cloneDeep from "lodash/cloneDeep";
 import assign from "lodash/assign";
+import { DEFAULT_CONFIG, handleHeader, handleRowsHeight } from "./utils";
+
 export default {
   name: "BaseScrollList",
   props: {
@@ -36,40 +66,62 @@ export default {
   setup(props) {
     const id = `base-scroll-list-${uuidV4()}`;
     const { width, height } = useScreen(id);
-    const DEFAULT_CONFIG = {
-      header: [],
-      headerStyle: [],
-      headerBg: "rgb(90,90,90)",
-      headerHeight: 35,
-      headerIndex: false,
-      headerIndexContent: "#",
-      headerIndexStyle: {},
-    };
     const actualConfig = ref({});
     const headerData = ref([]);
     const headerStyle = ref([]);
-    const handleHeader = (config) => {
-      const _headerData = cloneDeep(config.header);
-      const _headerStyle = cloneDeep(config.headerStyle);
-      if (_headerData.length === 0) {
-        return;
-      }
-      if (config.headerIndex) {
-        _headerData.unshift(config.headerIndexContent);
-        _headerStyle.unshift(config.headerIndexStyle);
-      }
+    const rowStyle = ref([]);
+    const columnWidths = ref([]);
+    const rowHeights = ref([]);
+    const rowsData = ref([]);
+    const rowNum = ref(0);
+    const aligns = ref([]);
+    const initList = (config) => {
+      const {
+        columnWidths: _columnWidths,
+        headerData: _headerData,
+        headerStyle: _headerStyle,
+        rowsData: _rowsData,
+        rowStyle: _rowStyle,
+        aligns: _aligns,
+      } = handleHeader({
+        config,
+        width,
+      });
+      columnWidths.value = _columnWidths;
       headerData.value = _headerData;
       headerStyle.value = _headerStyle;
+      rowsData.value = _rowsData;
+      rowStyle.value = _rowStyle;
+      aligns.value = _aligns;
+      rowNum.value =
+        config.rowNum > rowsData.value.length
+          ? rowsData.value.length
+          : config.rowNum;
+    };
+    const initRowsHeight = (config) => {
+      const { rowHeights: _rowHeights } = handleRowsHeight({
+        config,
+        height,
+        rowNum: rowNum.value,
+      });
+      rowHeights.value = _rowHeights;
     };
     onMounted(() => {
       const _actualConfig = assign(DEFAULT_CONFIG, props.config);
-      handleHeader(_actualConfig);
+      initList(_actualConfig);
+      initRowsHeight(_actualConfig);
       actualConfig.value = _actualConfig;
     });
     return {
       id,
       headerData,
       headerStyle,
+      columnWidths,
+      rowHeights,
+      rowsData,
+      rowStyle,
+      aligns,
+      actualConfig,
     };
   },
 };
@@ -91,6 +143,14 @@ export default {
     font-size: 15px;
     align-items: center;
     .header-item {
+    }
+  }
+
+  .base-scroll-list-rows {
+    display: flex;
+    align-items: center;
+    .base-scroll-list-columns {
+      font-size: 28px;
     }
   }
 }
