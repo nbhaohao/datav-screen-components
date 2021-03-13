@@ -82,7 +82,7 @@ export default {
     );
     const init = () => {
       const instance = getCurrentInstance();
-      const dom = instance.ctx.$refs["dataVFlyBoxContainer"];
+      const dom = instance.refs["dataVFlyBoxContainer"];
       width.value = dom.clientWidth;
       height.value = dom.clientHeight;
     };
