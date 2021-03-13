@@ -20,6 +20,8 @@ export const DEFAULT_CONFIG = {
   rowFontSize: 28,
   headerColor: "#fff",
   rowColor: "#000",
+  moveNum: 1,
+  duration: 2000,
 };
 
 const getAvgWidth = (dataArray, styleArray, width) => {
@@ -80,5 +82,9 @@ export const handleRowsHeight = ({ config, height, rowNum }) => {
   const avgHeight = unusedHeight / rowNum;
   return {
     rowHeights: new Array(rowNum).fill(avgHeight),
+    avgHeight,
   };
 };
+
+export const sleep = (duration) =>
+  new Promise((resolve) => setTimeout(resolve, duration));
