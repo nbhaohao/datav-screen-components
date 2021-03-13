@@ -1,6 +1,6 @@
 {
   "name": "datav-screen-components",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "lib": "dist/datav-components.min.js",
   "module": "dist/datav-components.es.min.js",
   "author": "nbhaohao <nbhaohao@163.com>",
