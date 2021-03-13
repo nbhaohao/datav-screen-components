@@ -7,7 +7,8 @@ export const DEFAULT_CONFIG = {
   headerBg: "rgb(90,90,90)",
   headerHeight: 35,
   headerIndex: false,
-  headerIndexContent: "#",
+  headerIndexContent: "",
+  headerIndexData: [],
   headerIndexStyle: {
     width: "50px",
   },
@@ -57,7 +58,17 @@ export const handleHeader = ({ config, width }) => {
     _headerStyle.unshift(config.headerIndexStyle);
     _rowStyle.unshift(config.rowIndexStyle);
     _aligns.unshift("center");
-    _rowsData.forEach((rows, index) => rows.unshift(index + 1));
+    _rowsData.forEach((rows, index) => {
+      if (
+        config.headerIndexData &&
+        config.headerIndexData.length > 0 &&
+        config.headerIndexData[index]
+      ) {
+        rows.unshift(config.headerIndexData[index]);
+      } else {
+        rows.unshift(index + 1);
+      }
+    });
   }
   const avgWidth = getAvgWidth(_headerData, _headerStyle, width);
   const columnWidths = new Array(_headerData.length).fill(avgWidth);

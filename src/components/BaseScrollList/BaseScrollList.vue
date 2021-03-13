@@ -139,8 +139,8 @@ export default {
     };
 
     const startAnimation = async (config, avgHeight) => {
-      const { data, rowNum, moveNum, duration } = config;
-      const totalLength = data.length;
+      const { rowNum, moveNum, duration } = config;
+      const totalLength = rowsData.value.length;
       if (totalLength < rowNum) {
         return;
       }
@@ -215,6 +215,7 @@ export default {
       transition: all 0.3s linear;
       .base-scroll-list-columns {
         font-size: 28px;
+        height: 100%;
       }
     }
   }

@@ -5,13 +5,15 @@
   "module": "dist/datav-components.es.js",
   "author": "nbhaohao <nbhaohao@163.com>",
   "license": "MIT",
+  "main": "dist",
   "scripts": {
     "dev": "rollup -wc rollup.config.dev.js",
     "build": "rollup -c rollup.config.dev.js",
     "build:prod": "rollup -c rollup.config.prod.js"
   },
   "peerDependencies": {
-    "uuid": "^8.0.0"
+    "uuid": "^8.0.0",
+    "lodash": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
