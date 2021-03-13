@@ -25,7 +25,7 @@ export default {
     let context;
     let dom;
     const initSize = () => {
-      dom = context.$refs.datavContainer;
+      dom = context.refs.datavContainer;
       return new Promise((resolve) => {
         nextTick(() => {
           if (props.options && props.options.width && props.options.height) {
@@ -66,7 +66,7 @@ export default {
       updateScale();
     }, 100);
     onMounted(async () => {
-      context = getCurrentInstance().ctx;
+      context = getCurrentInstance();
       await initSize();
       updateSize();
       updateScale();
