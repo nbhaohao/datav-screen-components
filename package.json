@@ -5,7 +5,7 @@
   "module": "dist/datav-components.es.js",
   "author": "nbhaohao <nbhaohao@163.com>",
   "license": "MIT",
-  "main": "dist",
+  "files": ["dist"],
   "scripts": {
     "dev": "rollup -wc rollup.config.dev.js",
     "build": "rollup -c rollup.config.dev.js",
